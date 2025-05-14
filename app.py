@@ -1,22 +1,20 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base
+### crud operations (create, read, update, delete) for the database
+from models import User, engine
+from sqlalchemy.orm import sessionmaker
+
+Session = sessionmaker(bind=engine)
+session = Session()
+
+##insert data
+user = User(name="John Doe", age=30)
+user_2 = User(name="Andrew", age=25)
+user_3 = User(name="Jane", age=28)
+user_4 = User(name="Doe", age=35)
+
+session.add(user_2)
+session.add_all([user_3, user_4])
 
 
-#"<dialect>://<username>:<password>@<host>:<port>/<database>"
-
-# postgresql - use pgadmin4
-postgresql_db_url = "postgresql://postgres:password@localhost:5432/postgres"
-# mysql - use mysql workbench
-mysql_db_url = "mysql+pymysql://root:password@localhost:3306/mysql"
-#oracle 
-oracle_db_url = "oracle+cx_oracle://username:password@localhost:1521/orcl"
-#sqlite
-sqlite_db_url = "sqlite:///sqlalchemy_tutorial.db"
-# Create an engine instance 
-
-engine = create_engine(sqlite_db_url)
-
-Base == declarative_base()
-
-Base.mmetadata.create_all(engine)
+session.add(user)
+session.commit()
 

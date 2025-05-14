@@ -1,1 +1,2 @@
 pip install SQLAlchemy
+need "database client" extension for connecting database
